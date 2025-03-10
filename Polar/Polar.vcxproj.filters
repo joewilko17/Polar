@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Polar">
+      <UniqueIdentifier>{E35EE50D-4F73-0DBF-18F5-B01E84C809F0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Polar\Events">
+      <UniqueIdentifier>{670D4550-5370-D4F4-FCF5-0CABE837A077}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Polar.h" />
+    <ClInclude Include="src\Polar\Application.h">
+      <Filter>Polar</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Polar\Core.h">
+      <Filter>Polar</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Polar\EntryPoint.h">
+      <Filter>Polar</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Polar\Events\ApplicationEvent.h">
+      <Filter>Polar\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Polar\Events\Event.h">
+      <Filter>Polar\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Polar\Events\KeyEvent.h">
+      <Filter>Polar\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Polar\Events\MouseEvent.h">
+      <Filter>Polar\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Polar\Log.h">
+      <Filter>Polar</Filter>
+    </ClInclude>
+    <ClInclude Include="src\plpch.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Polar\Application.cpp">
+      <Filter>Polar</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Polar\Log.cpp">
+      <Filter>Polar</Filter>
+    </ClCompile>
+    <ClCompile Include="src\plpch.cpp" />
+  </ItemGroup>
+</Project>

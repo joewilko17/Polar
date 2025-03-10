@@ -1,0 +1,6 @@
+[submodule "Polar/vendor/spdlog"]
+	path = Polar/vendor/spdlog
+	url = https://github.com/gabime/spdlog
+[submodule "Polar/vendor/GLFW"]
+	path = Polar/vendor/GLFW
+	url = https://github.com/TheCherno/glfw.git

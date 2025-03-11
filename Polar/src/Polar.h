@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include "Polar/Application.h"
+#include "Polar/Layer.h"
 #include "Polar/Log.h"
 
 // ---- Entry Point ----------------------

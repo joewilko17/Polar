@@ -12,6 +12,8 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include "Polar/Log.h"
+
 #ifdef POLAR_PLATFORM_WINDOWS
 	#include <Windows.h>
 #endif

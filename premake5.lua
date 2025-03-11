@@ -10,6 +10,14 @@ workspace "Polar"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "Polar/vendor/GLFW/include"
+IncludeDir["Glad"] = "Polar/vendor/Glad/include"
+
+include "Polar/vendor/GLFW"
+include "Polar/vendor/Glad"
+
 project "Polar"
 	location "Polar"
 	kind "SharedLib"
@@ -30,7 +38,17 @@ project "Polar"
 	includedirs
 	{
 		"%{prj.name}/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
+	}
+
+	links
+	{
+		"GLFW",
+		"Glad",
+		"opengl32.lib",
+		"dwmapi.lib"
 	}
 	
 	filter "system:windows"
@@ -41,7 +59,8 @@ project "Polar"
 		defines
 		{
 			"POLAR_PLATFORM_WINDOWS",
-			"POLAR_BUILD_DLL"
+			"POLAR_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		buildoptions 
@@ -57,14 +76,17 @@ project "Polar"
 		filter "configurations:Debug"
 			defines "POLAR_DEBUG"
 			symbols "On"
+			runtime "Release"
 
 		filter "configurations:Release"
 			defines "POLAR_RELEASE"
 			symbols "On"
+			runtime "Release"
 
 		filter "configurations:Dist"
 			defines "POLAR_DIST"
 			symbols "On"
+			runtime "Release"
 	
 project "Sandbox"
 	location "Sandbox"
@@ -103,9 +125,9 @@ project "Sandbox"
 
 		buildoptions 
 		{ 
-			"/utf-8" 
+			"/utf-8", 
+			"/MD"
 		}
-
 
 		filter "configurations:Debug"
 			defines "POLAR_DEBUG"

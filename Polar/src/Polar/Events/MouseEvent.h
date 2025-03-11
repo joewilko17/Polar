@@ -39,7 +39,7 @@ namespace Polar {
 		{
 			std::stringstream ss;
 			ss << "MouseScrolledEvent: " << GetXOffset() << ", " << GetYOffset();
-			ss.str();
+			return ss.str();
 		}
 
 		EVENT_CLASS_TYPE(MouseScrolled)
@@ -71,7 +71,7 @@ namespace Polar {
 		{
 			std::stringstream ss;
 			ss << "MouseButtonPressedEvent: " << m_Button;
-			ss.str();
+			return ss.str();
 		}
 
 		EVENT_CLASS_TYPE(MouseButtonPressed)
@@ -87,7 +87,7 @@ namespace Polar {
 		{
 			std::stringstream ss;
 			ss << "MouseButtonReleasedEvent" << m_Button;
-			ss.str();
+			return ss.str();
 		}
 		
 		EVENT_CLASS_TYPE(MouseButtonReleased)

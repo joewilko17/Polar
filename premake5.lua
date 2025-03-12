@@ -1,5 +1,6 @@
 workspace "Polar"
 	architecture "x64"
+	startproject "Sandbox"
 
 	configurations
 	{
@@ -14,9 +15,15 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 IncludeDir = {}
 IncludeDir["GLFW"] = "Polar/vendor/GLFW/include"
 IncludeDir["Glad"] = "Polar/vendor/Glad/include"
+IncludeDir["ImGui"] = "Polar/vendor/imgui"
 
-include "Polar/vendor/GLFW"
-include "Polar/vendor/Glad"
+-- External libraries
+group "Dependencies"
+		include "Polar/vendor/GLFW"
+		include "Polar/vendor/Glad"
+		include "Polar/vendor/imgui"
+group ""
+
 
 project "Polar"
 	location "Polar"
@@ -40,13 +47,15 @@ project "Polar"
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.Glad}"
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links
 	{
 		"GLFW",
 		"Glad",
+		"ImGui",
 		"opengl32.lib",
 		"dwmapi.lib"
 	}
@@ -70,7 +79,7 @@ project "Polar"
 
 		postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
 		}
 
 		filter "configurations:Debug"

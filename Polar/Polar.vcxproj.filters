@@ -24,6 +24,9 @@
     <ClInclude Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.h">
       <Filter>Platform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
@@ -52,6 +55,12 @@
     <ClInclude Include="src\Polar\ImGui\ImGuiLayer.h">
       <Filter>Polar\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="src\Polar\Input.h">
+      <Filter>Polar</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Polar\KeyCodes.h">
+      <Filter>Polar</Filter>
+    </ClInclude>
     <ClInclude Include="src\Polar\Layer.h">
       <Filter>Polar</Filter>
     </ClInclude>
@@ -61,18 +70,20 @@
     <ClInclude Include="src\Polar\Log.h">
       <Filter>Polar</Filter>
     </ClInclude>
+    <ClInclude Include="src\Polar\MouseButtonCodes.h">
+      <Filter>Polar</Filter>
+    </ClInclude>
     <ClInclude Include="src\Polar\Window.h">
       <Filter>Polar</Filter>
     </ClInclude>
     <ClInclude Include="src\plpch.h" />
-    <ClInclude Include="src\Polar\Input.h" />
-    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
-    <ClInclude Include="src\Polar\KeyCodes.h" />
-    <ClInclude Include="src\Polar\MouseButtonCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\ImGuiOpenGLRenderer.cpp">
       <Filter>Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
+      <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>
@@ -93,6 +104,5 @@
       <Filter>Polar</Filter>
     </ClCompile>
     <ClCompile Include="src\plpch.cpp" />
-    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
   </ItemGroup>
 </Project>

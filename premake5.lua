@@ -17,18 +17,15 @@ IncludeDir["GLFW"] = "Polar/vendor/GLFW/include"
 IncludeDir["Glad"] = "Polar/vendor/Glad/include"
 IncludeDir["ImGui"] = "Polar/vendor/imgui"
 
--- External libraries
-group "Dependencies"
-		include "Polar/vendor/GLFW"
-		include "Polar/vendor/Glad"
-		include "Polar/vendor/imgui"
-group ""
-
+include "Polar/vendor/GLFW"
+include "Polar/vendor/Glad"
+include "Polar/vendor/imgui"
 
 project "Polar"
 	location "Polar"
 	kind "SharedLib"
 	language "C++"
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -39,7 +36,7 @@ project "Polar"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/src/**.cpp"
 	}
 
 	includedirs
@@ -51,18 +48,16 @@ project "Polar"
 		"%{IncludeDir.ImGui}"
 	}
 
-	links
-	{
+	links 
+	{ 
 		"GLFW",
 		"Glad",
 		"ImGui",
-		"opengl32.lib",
-		"dwmapi.lib"
+		"opengl32.lib"
 	}
-	
+
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -72,9 +67,9 @@ project "Polar"
 			"GLFW_INCLUDE_NONE"
 		}
 
-		buildoptions 
-		{ 
-			"/utf-8" 
+		buildoptions
+		{
+			"/utf-8"
 		}
 
 		postbuildcommands
@@ -82,25 +77,26 @@ project "Polar"
 			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
 		}
 
-		filter "configurations:Debug"
-			defines "POLAR_DEBUG"
-			symbols "On"
-			runtime "Release"
+	filter "configurations:Debug"
+		defines "POLAR_DEBUG"
+		runtime "Debug"
+		symbols "On"
 
-		filter "configurations:Release"
-			defines "POLAR_RELEASE"
-			symbols "On"
-			runtime "Release"
+	filter "configurations:Release"
+		defines "POLAR_RELEASE"
+		runtime "Release"
+		optimize "On"
 
-		filter "configurations:Dist"
-			defines "POLAR_DIST"
-			symbols "On"
-			runtime "Release"
-	
+	filter "configurations:Dist"
+		defines "POLAR_DIST"
+		runtime "Release"
+		optimize "On"
+
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -108,23 +104,22 @@ project "Sandbox"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/src/**.cpp"
 	}
 
 	includedirs
 	{
-		"Polar/src",
-		"Polar/vendor/spdlog/include"
+		"Polar/vendor/spdlog/include",
+		"Polar/src"
 	}
 
 	links
 	{
 		"Polar"
 	}
-	
+
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -132,21 +127,22 @@ project "Sandbox"
 			"POLAR_PLATFORM_WINDOWS"
 		}
 
-		buildoptions 
-		{ 
-			"/utf-8", 
-			"/MD"
+		buildoptions
+		{
+			"/utf-8"
 		}
 
-		filter "configurations:Debug"
-			defines "POLAR_DEBUG"
-			symbols "On"
+	filter "configurations:Debug"
+		defines "POLAR_DEBUG"
+		runtime "Debug"
+		symbols "On"
 
-		filter "configurations:Release"
-			defines "POLAR_RELEASE"
-			symbols "On"
+	filter "configurations:Release"
+		defines "POLAR_RELEASE"
+		runtime "Release"
+		optimize "On"
 
-		filter "configurations:Dist"
-			defines "POLAR_DIST"
-			symbols "On"
-
+	filter "configurations:Dist"
+		defines "POLAR_DIST"
+		runtime "Release"
+		optimize "On"

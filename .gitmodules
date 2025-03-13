@@ -4,9 +4,9 @@
 [submodule "Polar/vendor/GLFW"]
 	path = Polar/vendor/GLFW
 	url = https://github.com/TheCherno/glfw.git
-[submodule "Polar/vendor/imgui"]
-	path = Polar/vendor/imgui
-	url = https://github.com/TheCherno/imgui
 [submodule "Polar/vendor/glm"]
 	path = Polar/vendor/glm
 	url = https://github.com/g-truc/glm
+[submodule "Polar/vendor/imgui"]
+	path = Polar/vendor/imgui
+	url = https://github.com/TheCherno/imgui.git

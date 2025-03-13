@@ -1,10 +1,13 @@
 #pragma once
 
 #include "Core.h"
-#include "Events/Event.h"
-#include "Polar/Events/ApplicationEvent.h"
+
 #include "Window.h"
 #include "Polar/LayerStack.h"
+#include "Events/Event.h"
+#include "Polar/Events/ApplicationEvent.h"
+
+#include "ImGui/ImGuiLayer.h"
 
 namespace Polar {
 
@@ -24,6 +27,7 @@ namespace Polar {
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 		std::unique_ptr<Window> m_Window;
+		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 	private:

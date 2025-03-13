@@ -1,3 +1,5 @@
+#pragma once
+
 #ifdef POLAR_PLATFORM_WINDOWS
 
 extern Polar::Application* Polar::CreateApplication();

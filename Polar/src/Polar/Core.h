@@ -1,13 +1,17 @@
 #pragma once
 
 #ifdef POLAR_PLATFORM_WINDOWS
+#if POLAR_DYNAMIC_LINK
 	#ifdef POLAR_BUILD_DLL
 		#define POLAR_API __declspec(dllexport)
 	#else
 		#define POLAR_API __declspec(dllimport)
 	#endif
 #else
-		#error  POLAR only supports windows
+	#define POLAR_API
+#endif
+#else
+	#error  Polar only supports windows
 #endif
 
 #ifdef POLAR_DEBUG

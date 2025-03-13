@@ -16,17 +16,21 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Polar/vendor/GLFW/include"
 IncludeDir["Glad"] = "Polar/vendor/Glad/include"
 IncludeDir["ImGui"] = "Polar/vendor/imgui"
+IncludeDir["glm"] = "Polar/vendor/glm"
 
+group "Dependencies"
 include "Polar/vendor/GLFW"
 include "Polar/vendor/Glad"
 include "Polar/vendor/imgui"
+group ""
 
 project "Polar"
 	location "Polar"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
-	staticruntime "off"
-
+	cppdialect "C++17"
+	staticruntime "on"
+	
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
@@ -36,7 +40,9 @@ project "Polar"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
 
 	includedirs
@@ -45,7 +51,8 @@ project "Polar"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links 
@@ -56,15 +63,19 @@ project "Polar"
 		"opengl32.lib"
 	}
 
+	 -- Disable warnings for fmtlib files
+	 filter "files:**/fmt/**"
+	 disablewarnings { "26495", "4265", "26812" }
+
 	filter "system:windows"
-		cppdialect "C++17"
 		systemversion "latest"
 
 		defines
 		{
 			"POLAR_PLATFORM_WINDOWS",
 			"POLAR_BUILD_DLL",
-			"GLFW_INCLUDE_NONE"
+			"GLFW_INCLUDE_NONE",
+			"_CRT_SECURE_NO_WARNINGS"
 		}
 
 		buildoptions
@@ -72,31 +83,27 @@ project "Polar"
 			"/utf-8"
 		}
 
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
-		}
-
 	filter "configurations:Debug"
 		defines "POLAR_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "POLAR_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "POLAR_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
-	staticruntime "off"
+	cppdialect "C++17"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -110,7 +117,9 @@ project "Sandbox"
 	includedirs
 	{
 		"Polar/vendor/spdlog/include",
-		"Polar/src"
+		"Polar/src",
+		"Polar/vendor",
+		"%{IncludeDir.glm}"
 	}
 
 	links
@@ -119,7 +128,6 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
 		systemversion "latest"
 
 		defines
@@ -135,14 +143,14 @@ project "Sandbox"
 	filter "configurations:Debug"
 		defines "POLAR_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "POLAR_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Dist"
 		defines "POLAR_DIST"
 		runtime "Release"
-		optimize "On"
+		optimize "on"

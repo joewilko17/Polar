@@ -87,7 +87,4 @@ namespace Polar {
 		return os << e.ToString();
 	}
 
-
-
-
 }

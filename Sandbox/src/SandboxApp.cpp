@@ -1,6 +1,6 @@
 #include <Polar.h>
 
-
+#include "imgui/imgui.h"
 
 class ExampleLayer : public Polar::Layer
 {
@@ -17,7 +17,6 @@ public:
 
 	void OnEvent(Polar::Event& event) override
 	{
-		//POLAR_TRACE("{0}", event.ToString());
 		if (event.GetEventType() == Polar::EventType::KeyPressed)
 		{
 			Polar::KeyPressedEvent& e = (Polar::KeyPressedEvent&)event;
@@ -35,7 +34,6 @@ public:
 	Sandbox()
 	{
 		PushLayer(new ExampleLayer());
-		PushOverlay(new Polar::ImGuiLayer());
 	}
 
 	~Sandbox()
@@ -44,7 +42,7 @@ public:
 	}
 };
 
-Polar::Application* Polar::CreateApplication()
-{
-	return new Sandbox();
-}
+//Polar::Application* Polar::CreateApplication()
+//{
+//	return new Sandbox();
+//}
